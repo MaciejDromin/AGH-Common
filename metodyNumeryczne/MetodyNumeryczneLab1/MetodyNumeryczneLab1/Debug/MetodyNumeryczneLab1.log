@@ -1,0 +1,16 @@
+﻿  MetodyNumeryczneLab1.cpp
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(32,19): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(33,19): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(34,19): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(35,19): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(36,19): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(37,19): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(38,19): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(39,19): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(77,27): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(83,16): warning C4244: "inicjowanie": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(111,15): warning C4101: "temp": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(120,15): warning C4101: "temp": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(129,15): warning C4101: "temp": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\MetodyNumeryczneLab1\MetodyNumeryczneLab1.cpp(138,15): warning C4101: "temp": lokalna zmienna, do której nie istnieje odwołanie
+  MetodyNumeryczneLab1.vcxproj -> C:\Users\Chrupek\source\repos\MetodyNumeryczneLab1\Debug\MetodyNumeryczneLab1.exe
