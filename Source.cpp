@@ -1,4 +1,4 @@
-﻿#include <glad/glad.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <iostream>
@@ -102,12 +102,12 @@ int main()
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    
+
 
     // vertex data
     //GLfloat **vertices = new GLfloat *[6];
     //GLfloat vertices[48];
-    std::vector<GLfloat> vertices(liczbaUsera * 12);
+    std::vector<GLfloat> vertices(liczbaUsera * 12*2);
     //GLfloat vertices [] 
     //    = {
     //    // coordinates          // colors
@@ -118,28 +118,30 @@ int main()
     //     
     //};
 
-    float kat = 360/liczbaUsera/2;
+    float kat = 360 / liczbaUsera / 2;
     float r = 0.4f;
+    for (int i = 0; i <= 2; i++) {
+        for (int i = 0; i < liczbaUsera * 4; i++) {
+            //std::cout << x;
+            //std::cout << "kat to: " << kat << std::endl;
+            float radiany = kat * 3.14159265359 / 180.0f;
+            int x;
+            if (i == 0) {
+                x = 0;
+            }
+            else {
+                x = i * 3;
+            }
+            vertices[x] = r * cos((360.0 / liczbaUsera * 3.14 / 180.0) * i);
+            vertices[x + 1] = r * sin((360.0 / liczbaUsera * 3.14 / 180.0) * i);
+            vertices[x + 2] = 0.0f;
 
-    for (int i = 0; i < liczbaUsera*4; i++) {
-        //std::cout << x;
-        //std::cout << "kat to: " << kat << std::endl;
-        float radiany = kat * 3.14159265359 / 180.0f;
-        int x;
-        if (i == 0) {
-            x = 0;
+            kat = kat + 360 / liczbaUsera / 2;
+
         }
-        else {
-            x = i * 3;
-        }
-        vertices[x] = r * cos((360.0 / liczbaUsera * 3.14 / 180.0) * i);
-        vertices[x + 1] = r * sin((360.0 / liczbaUsera * 3.14 / 180.0) * i);
-        vertices[x + 2] = 0.0f;
-
-        kat = kat + 360 / liczbaUsera / 2;
-
     }
-    
+   
+
 
     //GLuint indices[] = {
     //    0, 1, 2   // triangle 2
@@ -156,7 +158,7 @@ int main()
     //    0, 8, 9
     //};
 
-    for (int i = 0; i < liczbaUsera*4; i++) {
+    for (int i = 0; i < liczbaUsera * 4; i++) {
         int x;
         x = i * 3;
         indices[x] = 0;
@@ -195,8 +197,8 @@ int main()
 
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, 10000, GL_UNSIGNED_INT, 0);
-        //glDrawArrays(GL_TRIANGLES, 0, 10000);
+        //glDrawElements(GL_TRIANGLES, 10000, GL_UNSIGNED_INT, 0);
+        glDrawArrays(GL_TRIANGLES, 0, 10000);
         glBindVertexArray(0);
 
         //
