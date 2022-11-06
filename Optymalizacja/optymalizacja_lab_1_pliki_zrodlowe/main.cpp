@@ -37,8 +37,43 @@ void lab1()
     double d = 1, alpha = 1.1;
     int Nmax = 1000;
     double* p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
-    cout<<p[0]<<endl;
-    cout<<p[1]<<endl;
+    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+
+     x0 = 100;
+     d = 1, alpha = 1.1;
+     Nmax = 1000;
+    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
+    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+
+     x0 = 100;
+     d = 1, alpha = 1.5;
+     Nmax = 1000;
+    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
+    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+
+     x0 = -100;
+     d = 1, alpha = 1.5;
+     Nmax = 1000;
+    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
+    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+
+     x0 = -100;
+     d = 1, alpha = 2.5;
+     Nmax = 1000;
+    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
+    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+
+     x0 = -10;
+     d = 1, alpha = 2.5;
+     Nmax = 1000;
+    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
+    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+
+     x0 = 10;
+     d = 1, alpha = 2.5;
+     Nmax = 1000;
+    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
+    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
 }
 
 void lab2()
