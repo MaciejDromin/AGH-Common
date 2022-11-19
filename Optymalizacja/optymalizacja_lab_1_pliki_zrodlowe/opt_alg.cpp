@@ -126,21 +126,18 @@ double* expansion(matrix(*ff)(matrix, matrix, matrix), double x0, double d, doub
 //		throw ("double* expansion(...):\n" + ex_info);
 //	}
 //}
-int gcd(int a, int b)
+double gcd(int a, int b)
 {
     if (a == 0)
         return b;
     return gcd(b % a, a);
 }
 
-// A simple method to evaluate Euler Totient Function
-int phi(unsigned int n)
+
+double phi(double n)
 {
-    unsigned int result = 1;
-    for (int i = 2; i < n; i++)
-        if (gcd(i, n) == 1)
-            result++;
-    return result;
+    return (pow((1.0 + sqrt(5.0)) / 2.0, n) / sqrt(5.0) ) - (pow((1.0 - sqrt(5.0)) / 2.0, n) / sqrt(5.0));
+
 }
 
 solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double epsilon, matrix ud1, matrix ud2)
@@ -153,7 +150,27 @@ solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double eps
         double b0 = b;
         int n;
 
+        //szukanie k
         double k = 0;
+      //  φk > (b - a) / ε
+       double warunekdoK = (b-a)/epsilon;
+       cout<<"Fi: "<<phi(4)<<endl;
+       cout<<warunekdoK<<endl;
+       int x=0;
+
+        while(2<5){
+            if(phi(x)>(b-a)/epsilon){
+                k = x*1.0;
+                break;
+            }
+            x++;
+        }
+//if(phi(3)<=(b-a)/epsilon){
+//    cout<<"True"<<endl;
+//}else{
+//    cout<<"False"<<endl;
+//}
+        //cout<<phi(7)<<endl;
 
         double c0 = b0 - phi(k-1) / phi(k)*(b0-a0);
         double d0 = a0+b0-c0;
@@ -171,7 +188,7 @@ solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double eps
             cip1 = bip1 - phi(k-i-2) / phi(k-i-1)*(bip1 - aip1);
             dip1 = aip1 + bip1 - cip1;
         }
-        Xopt = cip1;
+       Xopt = cip1;
 		return Xopt;
 	}
 	catch (string ex_info)

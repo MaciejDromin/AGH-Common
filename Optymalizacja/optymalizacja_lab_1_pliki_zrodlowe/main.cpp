@@ -78,7 +78,9 @@ void lab1()
     double a = p[0];
     double b = p[1];
     cout<<"Metoda Fibonacziego"<<endl;
-    
+    double epsilon = 1e-10; double gamma = 1e-200; Nmax = 1000;
+
+    cout<<fib(ff, 1e-4, 1e-2, epsilon)<<endl;
 }
 
 void lab2()
