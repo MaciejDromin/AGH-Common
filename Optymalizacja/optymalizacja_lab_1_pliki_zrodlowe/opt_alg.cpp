@@ -137,7 +137,6 @@ double gcd(int a, int b)
 double phi(double n)
 {
     return (pow((1.0 + sqrt(5.0)) / 2.0, n) / sqrt(5.0) ) - (pow((1.0 - sqrt(5.0)) / 2.0, n) / sqrt(5.0));
-
 }
 
 solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double epsilon, matrix ud1, matrix ud2)
@@ -146,16 +145,11 @@ solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double eps
 	{
 		solution Xopt;
 		//Tu wpisz kod funkcji
-        double a0 = a;
-        double b0 = b;
-        int n;
+
 
         //szukanie k
         double k = 0;
       //  φk > (b - a) / ε
-       double warunekdoK = (b-a)/epsilon;
-       cout<<"Fi: "<<phi(4)<<endl;
-       cout<<warunekdoK<<endl;
        int x=0;
 
         while(2<5){
@@ -171,12 +165,18 @@ solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double eps
 //    cout<<"False"<<endl;
 //}
         //cout<<phi(7)<<endl;
-
+        double a0 = a;
+        double b0 = b;
         double c0 = b0 - phi(k-1) / phi(k)*(b0-a0);
         double d0 = a0+b0-c0;
-        double ci,di,ai,bi;
-        double aip1,bip1;
-        double cip1,dip1;
+        double ci=c0;
+        double di=d0;
+        double ai=a0;
+        double bi=b0;
+        double aip1=a0;
+        double bip1=b0;
+        double cip1=c0;
+        double dip1=d0;
         for(int i=0; i<k-3;i++){
             if(f(ci,ff) < f(di,ff)){
                 aip1 = ai;
@@ -188,7 +188,7 @@ solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double eps
             cip1 = bip1 - phi(k-i-2) / phi(k-i-1)*(bip1 - aip1);
             dip1 = aip1 + bip1 - cip1;
         }
-       Xopt = cip1;
+        Xopt = cip1;
 		return Xopt;
 	}
 	catch (string ex_info)
