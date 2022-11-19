@@ -39,11 +39,11 @@ void lab1()
     double* p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
     cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
 
-     x0 = 100;
-     d = 1, alpha = 1.1;
-     Nmax = 1000;
-    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
-    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+//     x0 = 100;
+//     d = 1, alpha = 1.1;
+//     Nmax = 1000;
+//    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
+//    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
 
      x0 = 100;
      d = 1, alpha = 1.5;
@@ -74,6 +74,11 @@ void lab1()
      Nmax = 1000;
     p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
     cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+
+    double a = p[0];
+    double b = p[1];
+    cout<<"Metoda Fibonacziego"<<endl;
+    
 }
 
 void lab2()

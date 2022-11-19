@@ -126,6 +126,22 @@ double* expansion(matrix(*ff)(matrix, matrix, matrix), double x0, double d, doub
 //		throw ("double* expansion(...):\n" + ex_info);
 //	}
 //}
+int gcd(int a, int b)
+{
+    if (a == 0)
+        return b;
+    return gcd(b % a, a);
+}
+
+// A simple method to evaluate Euler Totient Function
+int phi(unsigned int n)
+{
+    unsigned int result = 1;
+    for (int i = 2; i < n; i++)
+        if (gcd(i, n) == 1)
+            result++;
+    return result;
+}
 
 solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double epsilon, matrix ud1, matrix ud2)
 {
@@ -133,7 +149,29 @@ solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double eps
 	{
 		solution Xopt;
 		//Tu wpisz kod funkcji
+        double a0 = a;
+        double b0 = b;
+        int n;
 
+        double k = 0;
+
+        double c0 = b0 - phi(k-1) / phi(k)*(b0-a0);
+        double d0 = a0+b0-c0;
+        double ci,di,ai,bi;
+        double aip1,bip1;
+        double cip1,dip1;
+        for(int i=0; i<k-3;i++){
+            if(f(ci,ff) < f(di,ff)){
+                aip1 = ai;
+                bip1 = di;
+            }else{
+                bip1 = bi;
+                aip1 = ci;
+            }
+            cip1 = bip1 - phi(k-i-2) / phi(k-i-1)*(bip1 - aip1);
+            dip1 = aip1 + bip1 - cip1;
+        }
+        Xopt = cip1;
 		return Xopt;
 	}
 	catch (string ex_info)
