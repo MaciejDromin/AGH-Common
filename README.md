@@ -6,4 +6,4 @@ Wydział: WIMIP
 Kierunek: Informatyka stosowana/techniczna
 
 
-Zasadniczo nie każdy kod jest idealny ale na tyle ile udało się napisać w ograniczonym czasie na labach.
+Uwaga: kod tutaj jest taki jak te studia - potrafi rozczarować, pewnie nie wiele z tego Ci się przyda, sam prowadzący (tu piszący) często nie ma pojęcia o czym mówi
