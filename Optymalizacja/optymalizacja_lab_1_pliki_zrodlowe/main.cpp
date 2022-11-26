@@ -8,98 +8,108 @@ Akademia G�rniczo-Hutnicza
 *********************************************/
 
 #include"opt_alg.h"
+#include"user_funs.h"
 
 void lab1();
+
 void lab2();
+
 void lab3();
+
 void lab4();
+
 void lab5();
+
 using namespace std;
-int main()
-{
-	try
-	{
+
+int main() {
+    try {
         lab1();
-	}
-	catch (string EX_INFO)
-	{
-		cerr << "ERROR:\n";
-		cerr << EX_INFO << endl << endl;
-	}
-	system("pause");
-	return 0;
+    }
+    catch (string EX_INFO) {
+        cerr << "ERROR:\n";
+        cerr << EX_INFO << endl << endl;
+    }
+    system("pause");
+    return 0;
 }
 
-void lab1()
-{
-    cout<<"Metoda ekspansji"<<endl;
-    double x0 = 100;
-    double d = 1, alpha = 1.1;
-    int Nmax = 1000;
-    double* p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
-    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+void lab1() {
+    cout << "Metoda ekspansji" << endl;
+    double x0;
+    double d, alpha;
+    int Nmax;
+    double *p;
 
-//     x0 = 100;
-//     d = 1, alpha = 1.1;
-//     Nmax = 1000;
-//    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
-//    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+    x0 = 100;
+    d = 1, alpha = 1.1;
+    Nmax = 1000;
+    p = expansion(ff, x0, d, alpha, Nmax, NULL, NULL);
+    cout << "wynik: [" << p[0] << " ; " << p[1] << "]" << endl;
 
-     x0 = 100;
-     d = 1, alpha = 1.5;
-     Nmax = 1000;
-    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
-    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+    x0 = 100;
+    d = 1, alpha = 1.5;
+    Nmax = 1000;
+    p = expansion(ff, x0, d, alpha, Nmax, NULL, NULL);
+    cout << "wynik: [" << p[0] << " ; " << p[1] << "]" << endl;
 
-     x0 = -100;
-     d = 1, alpha = 1.5;
-     Nmax = 1000;
-    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
-    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+    x0 = -100;
+    d = 1, alpha = 1.5;
+    Nmax = 1000;
+    p = expansion(ff, x0, d, alpha, Nmax, NULL, NULL);
+    cout << "wynik: [" << p[0] << " ; " << p[1] << "]" << endl;
 
-     x0 = -100;
-     d = 1, alpha = 2.5;
-     Nmax = 1000;
-    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
-    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+    solution::clear_calls();
 
-     x0 = -10;
-     d = 1, alpha = 2.5;
-     Nmax = 1000;
-    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
-    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+    x0 = -100;
+    d = 1, alpha = 2.5;
+    Nmax = 1000;
+    p = expansion(ff, x0, d, alpha, Nmax, NULL, NULL);
+    cout << "wynik: [" << p[0] << " ; " << p[1] << "]" << endl;
 
-     x0 = 10;
-     d = 1, alpha = 2.5;
-     Nmax = 1000;
-    p = expansion(ff,x0,d,alpha,Nmax,NULL,NULL);
-    cout<<"wynik: ["<<p[0]<<" ; "<<p[1]<<"]"<<endl;
+    solution::clear_calls();
 
-    double a = p[0];
-    double b = p[1];
-    cout<<"Metoda Fibonacziego"<<endl;
-    double epsilon = 1e-10; double gamma = 1e-200; Nmax = 1000;
+    x0 = -10;
+    d = 1, alpha = 2.5;
+    Nmax = 1000;
+    p = expansion(ff, x0, d, alpha, Nmax, NULL, NULL);
+    cout << "wynik: [" << p[0] << " ; " << p[1] << "]" << endl;
 
-    cout<<fib(ff, 1e-4, 1e-2, epsilon)<<endl;
-}
+    solution::clear_calls();
 
-void lab2()
-{
+    x0 = 10;
+    d = 1, alpha = 2.5;
+    Nmax = 1000;
+    p = expansion(ff, x0, d, alpha, Nmax, NULL, NULL);
+    cout << "wynik: [" << p[0] << " ; " << p[1] << "]" << endl;
 
-}
+    solution::clear_calls();
 
-void lab3()
-{
+    cout << "Metoda Fibonacziego" << endl;
+    double epsilon = 1e-10;
+    double gamma = 1e-200;
+    Nmax = 1000;
 
-}
+    //cout<<fib(ff, 1e-4, 1e-2, epsilon)<<endl;
+    cout << fib(fR, 1e-4, 1e-2, epsilon) << endl;
 
-void lab4()
-{
+    solution::clear_calls();
 
 }
 
-void lab5()
-{
+void lab2() {
+
+}
+
+void lab3() {
+
+}
+
+void lab4() {
+
+}
+
+void lab5() {
 
 }
 
