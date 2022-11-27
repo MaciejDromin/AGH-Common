@@ -90,7 +90,11 @@ void lab1() {
     double gamma = 1e-200;
     Nmax = 1000;
 
-    //cout<<fib(ff, 1e-4, 1e-2, epsilon)<<endl;
+    cout << fib(fR, 1e-4, 1e-2, epsilon) << endl;
+
+    solution::clear_calls();
+
+    epsilon = 1e-7;
     cout << fib(fR, 1e-4, 1e-2, epsilon) << endl;
 
     solution::clear_calls();
