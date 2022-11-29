@@ -5,6 +5,8 @@ matrix f(double x, matrix(*ff)(matrix, matrix, matrix), matrix ud1 = NULL, matri
     return fg;
 }
 
+static int* F_A = new int[5000]{};
+
 double* expansion(matrix(*ff)(matrix, matrix, matrix), double x0, double d, double alpha, int Nmax, matrix ud1, matrix ud2)
 {
     try
@@ -58,58 +60,59 @@ double* expansion(matrix(*ff)(matrix, matrix, matrix), double x0, double d, doub
     }
 }
 
-double phi(double n)
-{
-    return (pow((1.0 + sqrt(5.0)) / 2.0, n) / sqrt(5.0) ) - (pow((1.0 - sqrt(5.0)) / 2.0, n) / sqrt(5.0));
+int fibo(int n) {
+    if (F_A[n] != 0 ) return F_A[n];
+    if (n == 0) return 0;
+    if (n == 1 ) {
+        F_A[n] = 1;
+        return F_A[n];
+    }
+    F_A[n] = fibo(n-1) + fibo(n-2);
+    return F_A[n];
 }
 
 solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double epsilon, matrix ud1, matrix ud2)
 {
-    // CORRECT VALUE FOR O1
-    // x = 0.00208886
-    // y = 1.15537e-07
 
 	try
 	{
 		solution Xopt;
-        /* double k = 0;
+        int k = 3;
 
-        // THIS APPROACH IS GIVING WEIRD VALUES
-        int x=0;
-        while(true){
-            if(phi(x)>(b-a)/epsilon){
-                k = x*1.0;
+        while (true) {
+            int temp = fibo(k);
+            if (temp * 1.0 > (b - a ) / epsilon) {
                 break;
             }
-            x++;
-        } */
+            k++;
+        }
 
-        int k = static_cast<int>(ceil(log2(sqrt(5) * (b-a)/epsilon)/log2((1 + sqrt(5))/ 2)));
+        solution AI(a), BI(b), C, D;
+        C.x = BI.x - 1.0 * F_A[k-1] / F_A[k] * (BI.x - AI.x);
+        D.x = AI.x + BI.x - C.x;
 
-        int *F = new int[k] {1, 1};
-        for (int i = 2; i < k; ++i)
-            F[i] = F[i-2] + F[i-1];
+        for (int i = 0;i<=k-3;i++) {
+            if (C.fit_fun(ff, ud1, ud2) < D.fit_fun(ff, ud1, ud2)) {
+                BI = D;
+            } else {
+                AI = C;
+            }
 
-        solution A(a), B(b), C, D;
-        C.x = B.x - 1.0 * F[k-2] / F[k-1] * (B.x - A.x);
-        D.x = A.x + B.x - C.x;
+            /**
+             *
+             * Maciej Lisowski
+             * Below you have to divide the [k-i-1]th Fibonacci number
+             * by [k-i] th number
+             * Instructions provided are wrong.
+             *
+             */
+
+            C.x = BI.x - 1.0 * F_A[k-i-1] / F_A[k-i] * (BI.x - AI.x);
+            D.x = AI.x + BI.x - C.x;
+        }
 
         C.fit_fun(ff, ud1, ud2);
         D.fit_fun(ff, ud1, ud2);
-
-        for (int i = 0;i<=k-3;i++) {
-            if (C.y < D.y) {
-                B = D;
-            } else {
-                A = C;
-            }
-            C.x = B.x - 1.0 * F[k-i-2]/F[k-i-1] * (B.x - A.x);
-            D.x = A.x + B.x - C.x;
-            C.fit_fun(ff, ud1, ud2);
-            D.fit_fun(ff, ud1, ud2);
-
-            ud1.add_row((B.x - A.x)());
-        }
 
         Xopt = C;
 		return Xopt;

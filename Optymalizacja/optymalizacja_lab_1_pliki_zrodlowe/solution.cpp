@@ -1,10 +1,18 @@
-//Ten plik nie powinien byæ edytowany
+//Ten plik nie powinien byï¿½ edytowany
 
 #include"solution.h"
 
 int solution::f_calls = 0;
 int solution::g_calls = 0;
 int solution::H_calls = 0;
+
+/**
+ *
+ * Maciej Lisowski
+ * Flag's value is always set to -1
+ * thus wrongly indicate errors in calculation
+ *
+ * */
 
 void solution::clear_calls()
 {
