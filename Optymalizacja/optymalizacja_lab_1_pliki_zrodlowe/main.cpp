@@ -102,7 +102,9 @@ void lab1() {
 }
 
 void lab2() {
+    solution::clear_calls();
 
+    // cout << HJ(fT2, ) << endl;
 }
 
 void lab3() {
