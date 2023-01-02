@@ -33,6 +33,12 @@ matrix fR(matrix x, matrix ud1, matrix ud2){
     return y;
 }
 
+matrix ff2(matrix x, matrix ud1, matrix ud2){
+    matrix y;
+    y = pow(x(0), 2) + pow(x(1), 2) - cos(2.5 * 3.14 * x(1)) - cos(2.5 * 3.14 * x(1)) + 2;
+    return y;
+}
+
 matrix df2(double t, matrix y, matrix ud1, matrix ud2) {
     double mr = 1, mc = 9, l = 0.5, b = 0.5;
     double I = mr * l * l / 3.0 + mc * l * l;

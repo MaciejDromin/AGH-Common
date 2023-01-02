@@ -24,7 +24,8 @@ using namespace std;
 
 int main() {
     try {
-        lab1();
+        // lab1();
+        lab2();
     }
     catch (string EX_INFO) {
         cerr << "ERROR:\n";
@@ -104,7 +105,25 @@ void lab1() {
 void lab2() {
     solution::clear_calls();
 
-    // cout << HJ(fT2, ) << endl;
+    double s = 0.5, alphaHJ = 0.5, epsilon = 1e-3;
+    int Nmax = 1000;
+    solution opt;
+    matrix x0;
+
+//    x0 = 2.0 * rand_mat(2, 1) - 1.0;
+//    cout << "x0: " << x0 << endl << endl;
+//    opt = HJ(ff2, x0, s, alphaHJ, epsilon, Nmax);
+//    cout << opt << endl << endl;
+//    solution::clear_calls();
+
+    //Ramie robota
+    s = 2;
+    x0 = 10.0 * rand_mat(2, 1);
+    cout << x0 << endl << endl;
+    opt = HJ(fT2, x0, s, alphaHJ, epsilon, Nmax);
+    cout << opt << endl << endl;
+    solution::clear_calls();
+
 }
 
 void lab3() {
