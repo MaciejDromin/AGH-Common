@@ -74,9 +74,9 @@ int fibo(int n) {
 solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double epsilon, matrix ud1, matrix ud2)
 {
 
-	try
-	{
-		solution Xopt;
+    try
+    {
+        solution Xopt;
         int k = 3;
 
         while (true) {
@@ -115,35 +115,35 @@ solution fib(matrix(*ff)(matrix, matrix, matrix), double a, double b, double eps
         D.fit_fun(ff, ud1, ud2);
 
         Xopt = C;
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution fib(...):\n" + ex_info);
-	}
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution fib(...):\n" + ex_info);
+    }
 
 }
 
 solution lag(matrix(*ff)(matrix, matrix, matrix), double a, double b, double epsilon, double gamma, int Nmax, matrix ud1, matrix ud2)
 {
-	try
-	{
-		solution Xopt;
-		//Tu wpisz kod funkcji
+    try
+    {
+        solution Xopt;
+        //Tu wpisz kod funkcji
 
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution lag(...):\n" + ex_info);
-	}
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution lag(...):\n" + ex_info);
+    }
 }
 
 solution HJ(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double alpha, double epsilon, int Nmax, matrix ud1, matrix ud2)
 {
-	try
-	{
-		solution xopt(x0), xoptPrev, x;
+    try
+    {
+        solution xopt(x0), xoptPrev, x;
         xopt.fit_fun(ff, ud1, ud2);
         do {
 
@@ -166,18 +166,18 @@ solution HJ(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double alp
 
         } while (s >= epsilon);
 
-		return xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution HJ(...):\n" + ex_info);
-	}
+        return xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution HJ(...):\n" + ex_info);
+    }
 }
 
 solution HJ_trial(matrix(*ff)(matrix, matrix, matrix), solution XB, double s, matrix ud1, matrix ud2)
 {
-	try
-	{
+    try
+    {
         int n = get_dim(XB);
         matrix e = ident_mat(n);
         solution x;
@@ -194,132 +194,142 @@ solution HJ_trial(matrix(*ff)(matrix, matrix, matrix), solution XB, double s, ma
                 }
             }
         }
-		return XB;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution HJ_trial(...):\n" + ex_info);
-	}
+        return XB;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution HJ_trial(...):\n" + ex_info);
+    }
 }
 
 solution Rosen(matrix(*ff)(matrix, matrix, matrix), matrix x0, matrix s0, double alpha, double beta, double epsilon, int Nmax, matrix ud1, matrix ud2)
 {
-	try
-	{
-		solution Xopt;
-		//Tu wpisz kod funkcji
+    try
+    {
+        solution Xopt;
+        //Tu wpisz kod funkcji
 
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution Rosen(...):\n" + ex_info);
-	}
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution Rosen(...):\n" + ex_info);
+    }
 }
 
 solution pen(matrix(*ff)(matrix, matrix, matrix), matrix x0, double c, double dc, double epsilon, int Nmax, matrix ud1, matrix ud2)
 {
-	try {
-		solution Xopt;
-		//Tu wpisz kod funkcji
+    try {
+        solution Xopt;
+        int i = 0;
 
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution pen(...):\n" + ex_info);
-	}
+        // Chyba tutaj ma byc implementacja funkcji penalty
+
+        do {
+            i++;
+            // wyznacz F(i)(x) = f(x) + c(i)S(x)
+            // wyznacz x(i) dla F(i) startujac z x(i-1)
+            // c(i+1) = alpha * c(i)
+            if (solution::f_calls > Nmax) throw("Number of calls was exceeded");
+        } while (abs(x0(i) - x0(i - 1)) >= epsilon);
+
+        Xopt = x0(i);
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution pen(...):\n" + ex_info);
+    }
 }
 
 solution sym_NM(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double alpha, double beta, double gamma, double delta, double epsilon, int Nmax, matrix ud1, matrix ud2)
 {
-	try
-	{
-		solution Xopt;
-		//Tu wpisz kod funkcji
+    try
+    {
+        solution Xopt;
 
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution sym_NM(...):\n" + ex_info);
-	}
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution sym_NM(...):\n" + ex_info);
+    }
 }
 
 solution SD(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, matrix), matrix x0, double h0, double epsilon, int Nmax, matrix ud1, matrix ud2)
 {
-	try
-	{
-		solution Xopt;
-		//Tu wpisz kod funkcji
+    try
+    {
+        solution Xopt;
+        //Tu wpisz kod funkcji
 
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution SD(...):\n" + ex_info);
-	}
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution SD(...):\n" + ex_info);
+    }
 }
 
 solution CG(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, matrix), matrix x0, double h0, double epsilon, int Nmax, matrix ud1, matrix ud2)
 {
-	try
-	{
-		solution Xopt;
-		//Tu wpisz kod funkcji
+    try
+    {
+        solution Xopt;
+        //Tu wpisz kod funkcji
 
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution CG(...):\n" + ex_info);
-	}
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution CG(...):\n" + ex_info);
+    }
 }
 
 solution Newton(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, matrix),
-	matrix(*Hf)(matrix, matrix, matrix), matrix x0, double h0, double epsilon, int Nmax, matrix ud1, matrix ud2)
+                matrix(*Hf)(matrix, matrix, matrix), matrix x0, double h0, double epsilon, int Nmax, matrix ud1, matrix ud2)
 {
-	try
-	{
-		solution Xopt;
-		//Tu wpisz kod funkcji
+    try
+    {
+        solution Xopt;
+        //Tu wpisz kod funkcji
 
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution Newton(...):\n" + ex_info);
-	}
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution Newton(...):\n" + ex_info);
+    }
 }
 
 solution golden(matrix(*ff)(matrix, matrix, matrix), double a, double b, double epsilon, int Nmax, matrix ud1, matrix ud2)
 {
-	try
-	{
-		solution Xopt;
-		//Tu wpisz kod funkcji
+    try
+    {
+        solution Xopt;
+        //Tu wpisz kod funkcji
 
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution golden(...):\n" + ex_info);
-	}
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution golden(...):\n" + ex_info);
+    }
 }
 
 solution EA(matrix(*ff)(matrix, matrix, matrix), int N, matrix limits, int mi, int lambda, matrix sigma0, double epsilon, int Nmax, matrix ud1, matrix ud2)
 {
-	try
-	{
-		solution Xopt;
-		//Tu wpisz kod funkcji
+    try
+    {
+        solution Xopt;
+        //Tu wpisz kod funkcji
 
-		return Xopt;
-	}
-	catch (string ex_info)
-	{
-		throw ("solution EA(...):\n" + ex_info);
-	}
+        return Xopt;
+    }
+    catch (string ex_info)
+    {
+        throw ("solution EA(...):\n" + ex_info);
+    }
 }
 
 /*
