@@ -144,27 +144,27 @@ solution HJ(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double alp
 	try
 	{
 		solution xopt(x0), xoptPrev, x;
+        xopt.fit_fun(ff, ud1, ud2);
         do {
 
-            xopt = x;
             x = HJ_trial(ff, xopt, s);
 
-            if (x.fit_fun(ff, ud1, ud2) < xopt.fit_fun(ff, ud1, ud2)) {
+            if (x.y < xopt.y) {
                 do {
                     xoptPrev = xopt;
                     xopt = x;
-                    x = 2.0 * xopt.x - xoptPrev.x;
+                    x.x = 2.0 * xopt.x - xoptPrev.x;
+                    x.fit_fun(ff, ud1, ud2);
                     x = HJ_trial(ff, x, s);
                     if (solution::f_calls > Nmax) throw ("Too many iterations");
-                } while (x.fit_fun(ff, ud1, ud2) >= xopt.fit_fun(ff, ud1, ud2));
-                x = xopt;
+                } while (x.fit_fun(ff, ud1, ud2) < xopt.fit_fun(ff, ud1, ud2));
             } else {
                 s *= alpha;
             }
 
             if (solution::f_calls > Nmax) throw ("Too many iterations");
 
-        } while (s < epsilon);
+        } while (s >= epsilon);
 
 		return xopt;
 	}
@@ -181,13 +181,15 @@ solution HJ_trial(matrix(*ff)(matrix, matrix, matrix), solution XB, double s, ma
         int n = get_dim(XB);
         matrix e = ident_mat(n);
         solution x;
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             x.x = XB.x + s * e[i];
-            if (x.fit_fun(ff, ud1, ud2) < XB.fit_fun(ff, ud1, ud2)) {
+            x.fit_fun(ff, ud1, ud2);
+            if (x.y < XB.y) {
                 XB = x;
             } else {
                 x.x = XB.x - s * e[i];
-                if (x.fit_fun(ff, ud1, ud2) < XB.fit_fun(ff, ud1, ud2)) {
+                x.fit_fun(ff, ud1, ud2);
+                if (x.y < XB.y) {
                     XB = x;
                 }
             }
