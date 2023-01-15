@@ -131,7 +131,7 @@ void lab3() {
 }
 
 void lab4() {
-
+    // Wywowac i sprawdzic SD, CG, Newton
 }
 
 void lab5() {

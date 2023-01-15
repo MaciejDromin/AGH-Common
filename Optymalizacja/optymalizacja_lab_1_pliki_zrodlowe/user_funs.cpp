@@ -120,3 +120,76 @@ matrix fr3(matrix x, matrix ud1, matrix ud2) {
     if (abs(yB[1](i50, 0) - 5) - 1 > 0) y = y + ud2 * pow((yB[1](i50, 0) - 5) - 1, 2);
     return y;
 }
+
+matrix ff4T(matrix x, matrix ud1, matrix ud2) {
+    matrix y;
+    y = pow(x(0) + 2 * x(1) - 7, 2) + pow(2 * x(0) + x(1) - 5, 2);
+    return y;
+}
+
+matrix gf4T(matrix x, matrix ud1, matrix ud2) {
+    matrix g(2, 1);
+    g(0) = 10 * x(0) + 8 * x(1) - 34;
+    g(0) = 8 * x(0) + 10 * x(1) - 38;
+    return g;
+}
+
+matrix Hf4T(matrix x, matrix ud1, matrix ud2) {
+    matrix H(2, 2);
+    H(0, 0) = H(1, 1) = 10;
+    H(0, 1) = H(1, 0) = 8;
+    return H;
+}
+
+matrix ff4R(matrix x, matrix ud1, matrix ud2) {
+    matrix y;
+    int m = 100;
+    int n = get_len(x);
+    static matrix X(n, m), Y(1, m);
+    static bool read = true;
+    if (read) {
+        ifstream S("XData.txt");
+        S >> X;
+        S.close();
+        S.open("YData.txt");
+        S >> Y;
+        S.close();
+        read = false;
+    }
+    double h;
+    y = 0;
+    for (int i = 0; i < m; i++) {
+        h = (trans(x) * X[i])();
+        h = 1.0 / (1.0 + exp(-h));
+        y = y - Y(0, i) * log(h) - (1 - Y(0, i)) * log(1 - h);
+    }
+    y = y / m;
+    return y;
+}
+
+matrix gf4R(matrix x, matrix ud1, matrix ud2) {
+    int m = 100;
+    int n = get_len(x);
+    matrix g(n, 1);
+    static matrix X(n, m), Y(1, m);
+    static bool read = true;
+    if (read) {
+        ifstream S("XData.txt");
+        S >> X;
+        S.close();
+        S.open("YData.txt");
+        S >> Y;
+        S.close();
+        read = false;
+    }
+    double h;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            h = (trans(x) * X[j])();
+            h = 1.0 / (1.0 + exp(-h));
+            g(i) = g(i) + X(i, j) * (h - Y(0, j));
+        }
+        g(i) = g(i) / m;
+    }
+    return g;
+}

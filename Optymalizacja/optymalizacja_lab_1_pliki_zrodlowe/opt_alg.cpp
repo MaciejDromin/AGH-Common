@@ -261,7 +261,33 @@ solution SD(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, mat
     try
     {
         solution Xopt;
-        //Tu wpisz kod funkcji
+        Xopt.ud = trans(x0);
+        int n = get_len(x0);
+        solution X0, X1;
+        X0.x = x0;
+        matrix d(n, 1);
+        solution h;
+        double* ab;
+        while (true) {
+            d = -X0.grad(gf, ud1, ud2);
+            X1.x = X0.x + h0 + d;
+
+            Xopt.ud.add_row(trans(X1.x));
+
+            if (norm(X0.x - X1.x) < epsilon) {
+                Xopt = X1;
+                Xopt.fit_fun(ff, ud1, ud2);
+                Xopt.flag = 0;
+                break;
+            }
+            if (solution::f_calls > Nmax || solution::g_calls > Nmax) {
+                Xopt = X1;
+                Xopt.fit_fun(ff, ud1, ud2);
+                Xopt.flag = 1;
+                break;
+            }
+            X0 = X1;
+        }
 
         return Xopt;
     }
@@ -276,7 +302,35 @@ solution CG(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, mat
     try
     {
         solution Xopt;
-        //Tu wpisz kod funkcji
+        Xopt.ud = trans(x0);
+        int n = get_len(x0);
+        solution X0, X1;
+        X0.x = x0;
+        matrix d(n, 1), P(n, 2);
+        solution h;
+        double* ab, beta;
+        d = -X0.grad(gf, ud1, ud2);
+        while (true) {
+            X1.x = X0.x + h0 * d;
+            Xopt.ud.add_row(trans(X1.x));
+
+            if(norm(X0.x - X1.x) < epsilon) {
+                Xopt = X1;
+                Xopt.fit_fun(ff, ud1, ud2);
+                Xopt.flag = 0;
+                break;
+            }
+            cout << norm(X0.x - X1.x) << " " << epsilon << endl;
+            if (solution::f_calls > Nmax || solution::g_calls > Nmax) {
+                Xopt = X1;
+                Xopt.fit_fun(ff, ud1, ud2);
+                Xopt.flag = 1;
+                break;
+            }
+            beta = pow(norm(X1.grad(gf, ud1, ud2)), 2) / pow(norm(X0.g), 2);
+            d = -X1.g + beta * d;
+            X0 = X1;
+        }
 
         return Xopt;
     }
@@ -292,7 +346,30 @@ solution Newton(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix,
     try
     {
         solution Xopt;
-        //Tu wpisz kod funkcji
+        Xopt.ud = trans(x0);
+        int n = get_len(x0);
+        solution X0, X1;
+        X0.x = x0;
+        matrix d(n, 1);
+
+        while (true) {
+            d = -inv(X0.hess(Hf, ud1, ud2)) * X0.grad(gf, ud1, ud2);
+            X1.x = X0.x + h0 * d;
+            Xopt.ud.add_row(trans((X1.x)));
+            if (norm(X0.x - X1.x) < epsilon) {
+                Xopt = X1;
+                Xopt.fit_fun(ff, ud1, ud2);
+                Xopt.flag = 0;
+                break;
+            }
+            if (solution::f_calls > Nmax || solution::g_calls > Nmax || solution::H_calls > Nmax) {
+                Xopt = X1;
+                Xopt.fit_fun(ff, ud1, ud2);
+                Xopt.flag = 1;
+                break;
+            }
+            X0 = X1;
+        }
 
         return Xopt;
     }
