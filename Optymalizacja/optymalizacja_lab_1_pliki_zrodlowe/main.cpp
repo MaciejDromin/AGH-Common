@@ -26,7 +26,8 @@ int main() {
     try {
         // lab1();
         // lab2();
-        lab4();
+        lab3();
+        //lab4();
     }
     catch (string EX_INFO) {
         cerr << "ERROR:\n";
@@ -128,7 +129,18 @@ void lab2() {
 }
 
 void lab3() {
+    //Funkcja testowa
+    matrix x0, a(4);
+    double c_ex = 1, c_in = 10, dc_ex = 2, dc_in = 0.5, epsilon = 1e-4;
+    int Nmax = 10000;
+    solution opt;
 
+    do x0 = 5 * rand_mat(2, 1) + 1;
+    while (norm(x0) > a);
+
+    opt = pen(fT3A, x0, c_ex, dc_ex, epsilon, Nmax, a);
+
+    cout << opt << endl;
 }
 
 void lab4() {

@@ -221,19 +221,26 @@ solution pen(matrix(*ff)(matrix, matrix, matrix), matrix x0, double c, double dc
 {
     try {
         solution Xopt;
-        int i = 0;
-
-        // Chyba tutaj ma byc implementacja funkcji penalty
-
-        do {
-            i++;
-            // wyznacz F(i)(x) = f(x) + c(i)S(x)
-            // wyznacz x(i) dla F(i) startujac z x(i-1)
-            // c(i+1) = alpha * c(i)
-            if (solution::f_calls > Nmax) throw("Number of calls was exceeded");
-        } while (abs(x0(i) - x0(i - 1)) >= epsilon);
-
-        Xopt = x0(i);
+        double alpha = 1, beta = 0.5, gamma = 2, delta = 0.5, s = 0.5;
+        solution X(x0), X1;
+        while (true)
+        {
+            X1 = sym_NM(ff, X.x, s, alpha, beta, gamma, delta, epsilon, Nmax, ud1, c);
+            if (norm(X.x - X1.x) < epsilon)
+            {
+                Xopt = X1;
+                Xopt.flag = 0;
+                break;
+            }
+            if (solution::f_calls > Nmax)
+            {
+                Xopt = X1;
+                Xopt.flag = 1;
+                break;
+            }
+            c *= dc;
+            X = X1;
+        }
         return Xopt;
     }
     catch (string ex_info)
@@ -247,8 +254,62 @@ solution sym_NM(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double
     try
     {
         solution Xopt;
-
-        return Xopt;
+        int n = get_len(x0);
+        matrix D = ident_mat(n);
+        int N = n + 1;
+        solution* S = new solution[N];
+        S[0].x = x0;
+        S[0].fit_fun(ff, ud1, ud2);
+        for (int i = 1; i < N; i++) {
+            S[i].x = S[0].x + s * D[i - 1];
+            S[i].fit_fun(ff, ud1, ud2);
+        }
+        solution PO, PE, PZ;
+        matrix pc;
+        int iMin, iMax;
+        while (true) {
+            iMin = iMax = 0;
+            for (int i = 1; i < N; i++) {
+                if (S[iMin].y > S[i].y) iMin = i;
+                if (S[iMax].y < S[i].y) iMax = i;
+            }
+            pc = matrix(n, 1);
+            for (int i = 0; i < N; i++) {
+                if (i != iMax) pc = pc + S[i].x;
+            }
+            pc = pc / (N - 1.0);
+            PO.x = pc + alpha * (pc - S[iMax].x);
+            PO.fit_fun(ff, ud1, ud2);
+            if (PO.y < S[iMin].y) {
+                PE.x = pc + gamma * (PO.x - pc);
+                PE.fit_fun(ff, ud1, ud2);
+                if (PE.y < PO.y) S[iMax] = PE;
+                else S[iMax] = PO;
+            } else {
+                if (S[iMin].y <= PO.y && PO.y < S[iMax].y) S[iMax] = PO;
+                else {
+                    PZ.x = pc + beta * (S[iMax].x - pc);
+                    PZ.fit_fun(ff, ud1, ud2);
+                    if (PZ.y >= S[iMax].y) {
+                        for (int i = 0; i < N; i++) {
+                            if (i != iMin) {
+                                S[i].x = delta * (S[i].x + S[iMin].x);
+                                S[i].fit_fun(ff, ud1, ud2);
+                            }
+                        }
+                    } else {
+                        S[iMax] = PZ;
+                    }
+                }
+            }
+            if (solution::f_calls > Nmax) {
+                throw ("Error occured");
+            }
+            double max = 0;
+            for (int itmp = 0; itmp < N; itmp++) if (S[itmp].x() > max) max = S[itmp].x();
+            if (norm(S[iMin].x - max) < epsilon) break;
+        }
+        return Xopt = S[iMin];
     }
     catch (string ex_info)
     {
