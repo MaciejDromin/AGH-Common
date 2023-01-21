@@ -130,7 +130,7 @@ matrix ff4T(matrix x, matrix ud1, matrix ud2) {
 matrix gf4T(matrix x, matrix ud1, matrix ud2) {
     matrix g(2, 1);
     g(0) = 10 * x(0) + 8 * x(1) - 34;
-    g(0) = 8 * x(0) + 10 * x(1) - 38;
+    g(1) = 8 * x(0) + 10 * x(1) - 38;
     return g;
 }
 
