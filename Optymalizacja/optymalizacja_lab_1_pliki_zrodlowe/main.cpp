@@ -25,7 +25,9 @@ using namespace std;
 int main() {
     try {
         // lab1();
-        lab2();
+        // lab2();
+        lab3();
+        //lab4();
     }
     catch (string EX_INFO) {
         cerr << "ERROR:\n";
@@ -127,11 +129,36 @@ void lab2() {
 }
 
 void lab3() {
+    //Funkcja testowa
+    matrix x0, a(4);
+    double c_ex = 1, c_in = 10, dc_ex = 2, dc_in = 0.5, epsilon = 1e-4;
+    int Nmax = 10000;
+    solution opt;
 
+    do x0 = 5 * rand_mat(2, 1) + 1;
+    while (norm(x0) > a);
+
+    opt = pen(fT3A, x0, c_ex, dc_ex, epsilon, Nmax, a);
+
+    cout << opt << endl;
 }
 
 void lab4() {
-
+    double epsilon = 1e-3, h = -1;
+    cout << h << endl << endl;
+    int Nmax = 5000;
+    matrix x0 = 20 * rand_mat(2, 1) - 10;
+    cout << x0 << endl << endl;
+    solution opt;
+    opt = SD(ff4T, gf4T, x0, h, epsilon, Nmax);
+    cout << opt << endl << endl;
+    solution::clear_calls();
+    opt = CG(ff4T, gf4T, x0, h, epsilon, Nmax);
+    cout << opt << endl << endl;
+    solution::clear_calls();
+    opt = Newton(ff4T, gf4T, Hf4T, x0, h, epsilon, Nmax);
+    cout << opt << endl << endl;
+    solution::clear_calls();
 }
 
 void lab5() {
