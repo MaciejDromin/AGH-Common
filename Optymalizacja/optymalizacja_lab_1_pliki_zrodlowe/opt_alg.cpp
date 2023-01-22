@@ -347,7 +347,7 @@ solution SD(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, mat
                 Xopt.flag = 1;
                 break;
             }
-            X0 = X1;
+            // X0 = X1; if these lines are uncommented we get nan or inf value
         }
 
         return Xopt;
