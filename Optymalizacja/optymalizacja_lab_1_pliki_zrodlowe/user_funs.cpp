@@ -67,7 +67,7 @@ matrix fT2(matrix x, matrix ud1, matrix ud2) {
 
 matrix fT3A(matrix x, matrix ud1, matrix ud2) {
     matrix y;
-    double arg = PI * sqrt(pow(x(0) / PI, 2)) + pow(x(1) / PI, 2);
+    double arg = PI * sqrt(pow(x(0) / PI, 2) + pow(x(1) / PI, 2));
     y = sin(arg) / arg;
     if (-x(0) + 1 > 0) y = y + ud2 * pow(-x(0) + 1, 2);
     if (-x(1) + 1 > 0) y = y + ud2 * pow(-x(1) + 1, 2);
@@ -77,7 +77,7 @@ matrix fT3A(matrix x, matrix ud1, matrix ud2) {
 
 matrix fT3B(matrix x, matrix ud1, matrix ud2) {
     matrix y;
-    double arg = PI * sqrt(pow(x(0) / PI, 2)) + pow(x(1) / PI, 2);
+    double arg = PI * sqrt(pow(x(0) / PI, 2) + pow(x(1) / PI, 2));
     y = sin(arg) / arg;
     if (-x(0) + 1 > 0) y = 10e10;
     else y = y - ud2 / (-x(0) - 1);
@@ -89,24 +89,25 @@ matrix fT3B(matrix x, matrix ud1, matrix ud2) {
 }
 
 matrix df3(double t, matrix x, matrix ud1, matrix ud2) {
+    cout << t << ";" << x(0) << ";" << x(2) << endl;
     double c = 0.47, r = 0.12, m = 0.6, v0y = 0, g = 9.81;
     double s = PI * r * r;
     double dx = 0.5 * c * v0y * s * abs(x(1)) * x(1);
     double dy = 0.5 * c * v0y * s * abs(x(3)) * x(3);
-    double fmx = PI * v0y * x(3) * m2d(ud2) * pow(r, 3);
-    double fmy = PI * v0y * x(1) * m2d(ud2) * pow(r, 3);
+    double fmx = PI * v0y * x(3) * ud2() * pow(r, 3);
+    double fmy = PI * v0y * x(1) * ud2() * pow(r, 3);
     matrix dY(4, 1);
     dY(0) = x(1);
     dY(1) = (-dx - fmx) / m;
     dY(2) = x(3);
     dY(3) = (-g - dy - fmy) / m;
-    return dy;
+    return dY;
 }
 
 matrix fr3(matrix x, matrix ud1, matrix ud2) {
     matrix y;
     matrix y0(4, new double[4]{0, x(0), 100, 0});
-    matrix* yB = solve_ode(df3, 0, 0.01, 7, y0, ud1, x);
+    matrix* yB = solve_ode(df3, 0, 0.01, 7, y0, ud1, x(1));
     int n = get_len(yB[0]);
     int i50 = 0;
     int i0 = 0;

@@ -131,14 +131,24 @@ void lab2() {
 void lab3() {
     //Funkcja testowa
     matrix x0, a(4);
-    double c_ex = 1, c_in = 10, dc_ex = 2, dc_in = 0.5, epsilon = 1e-4;
+    double c_ex = 1, c_in = 10, dc_ex = 2, dc_in = 0.5, epsilon = 1e-3;
     int Nmax = 10000;
-    solution opt;
+    solution opt, opt1;
+    /*do x0 = 5 * rand_mat(2, 1) + 1;
+    while (norm(x0) > a);*/
 
-    do x0 = 5 * rand_mat(2, 1) + 1;
-    while (norm(x0) > a);
 
-    opt = pen(fT3A, x0, c_ex, dc_ex, epsilon, Nmax, a);
+
+    cout << x0 << endl;
+    //// Problem testowy zewnetrzny
+//    opt = pen(fT3A, x0, c_ex, dc_ex, epsilon, Nmax, a);
+
+    //// Problem testowy wewnetrzny
+//    opt = pen(fT3B, x0, c_ex, dc_ex, epsilon, Nmax, a);
+
+    //// Problem rzeczywisty
+    x0 = matrix(2, new double[2]{2.45783, 2.87194});
+    opt = pen(fr3, x0, c_in, dc_in, epsilon, Nmax, a);
 
     cout << opt << endl;
 }
