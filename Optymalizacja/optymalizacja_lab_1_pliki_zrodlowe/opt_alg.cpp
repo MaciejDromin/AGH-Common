@@ -303,7 +303,10 @@ solution sym_NM(matrix(*ff)(matrix, matrix, matrix), matrix x0, double s, double
                 }
             }
             if (solution::f_calls > Nmax) {
-                throw ("Error occured");
+                cout<<"Error occured"<<endl;
+                Xopt.flag = -1;
+                Xopt = S[iMin];
+                return Xopt;
             }
             double max = 0;
             for (int itmp = 0; itmp < N; itmp++) if (S[itmp].x() > max) max = S[itmp].x();
