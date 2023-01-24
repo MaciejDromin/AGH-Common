@@ -144,22 +144,29 @@ void lab3() {
 }
 
 void lab4() {
-    double epsilon = 1e-3, h = 0.12;
-    cout << h << endl << endl;
+    double epsilon = 1e-3, h = 0.05;
+    //cout << h << endl << endl;
     int Nmax = 5000;
     matrix ud1, ud2;
     matrix x0 = 20 * rand_mat(2, 1) - 10;
     cout << x0 << endl << endl;
     solution opt;
-    opt = SD(ff4T, gf4T, x0, h, epsilon, Nmax, ud1, ud2);
+    //// Problem testowy
+    /*opt = SD(ff4T, gf4T, x0, h, epsilon, Nmax, ud1, ud2);
     cout << opt << endl << endl;
     solution::clear_calls();
-//    opt = CG(ff4T, gf4T, x0, h, epsilon, Nmax);
-//    cout << opt << endl << endl;
-//    solution::clear_calls();
-//    opt = Newton(ff4T, gf4T, Hf4T, x0, h, epsilon, Nmax);
-//    cout << opt << endl << endl;
-//    solution::clear_calls();
+    opt = CG(ff4T, gf4T, x0, h, epsilon, Nmax);
+    cout << opt << endl << endl;
+    solution::clear_calls();
+    opt = Newton(ff4T, gf4T, Hf4T, x0, h, epsilon, Nmax);
+    cout << opt << endl << endl;
+    solution::clear_calls();*/
+    //// Problem rzeczywisty
+    epsilon = 0.001; h = 0.0001;
+    Nmax = 20000;
+    x0 = matrix(3, 1, 0.0);
+    opt = CG(ff4R, gf4R, x0, h, epsilon, Nmax);
+    cout << opt.x(0) << ";" << opt.x(1) << ";" << opt.x(2) << ";" << opt.y << ";" << opt.g_calls << endl;
 }
 
 void lab5() {

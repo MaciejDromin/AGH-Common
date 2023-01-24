@@ -331,6 +331,7 @@ solution SD(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, mat
         while (true) {
             d = -X0.grad(gf, ud1, ud2);
             X1.x = X0.x + h0 * d;
+            // cout << X1.x(0) << ";" << X1.x(1) << endl;
 
             Xopt.ud.add_row(trans(X1.x));
 
@@ -340,14 +341,13 @@ solution SD(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, mat
                 Xopt.flag = 0;
                 break;
             }
-            cout << norm(X0.x - X1.x) << " " << epsilon << endl;
             if (solution::f_calls > Nmax || solution::g_calls > Nmax) {
                 Xopt = X1;
                 Xopt.fit_fun(ff, ud1, ud2);
                 Xopt.flag = 1;
                 break;
             }
-            // X0 = X1; if these lines are uncommented we get nan or inf value
+            X0 = X1;
         }
 
         return Xopt;
@@ -374,6 +374,7 @@ solution CG(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, mat
         while (true) {
             X1.x = X0.x + h0 * d;
             Xopt.ud.add_row(trans(X1.x));
+            cout << X1.x(0) << ";" << X1.x(1) << endl;
 
             if(norm(X0.x - X1.x) < epsilon) {
                 Xopt = X1;
@@ -381,7 +382,7 @@ solution CG(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix, mat
                 Xopt.flag = 0;
                 break;
             }
-            cout << norm(X0.x - X1.x) << " " << epsilon << endl;
+            //cout << norm(X0.x - X1.x) << " " << epsilon << endl;
             if (solution::f_calls > Nmax || solution::g_calls > Nmax) {
                 Xopt = X1;
                 Xopt.fit_fun(ff, ud1, ud2);
@@ -416,6 +417,7 @@ solution Newton(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix,
         while (true) {
             d = -inv(X0.hess(Hf, ud1, ud2)) * X0.grad(gf, ud1, ud2);
             X1.x = X0.x + h0 * d;
+            cout << X1.x(0) << ";" << X1.x(1) << endl;
             Xopt.ud.add_row(trans((X1.x)));
             if (norm(X0.x - X1.x) < epsilon) {
                 Xopt = X1;
@@ -423,7 +425,7 @@ solution Newton(matrix(*ff)(matrix, matrix, matrix), matrix(*gf)(matrix, matrix,
                 Xopt.flag = 0;
                 break;
             }
-            cout << norm(X0.x - X1.x) << " " << epsilon << endl;
+            // cout << norm(X0.x - X1.x) << " " << epsilon << endl;
             if (solution::f_calls > Nmax || solution::g_calls > Nmax || solution::H_calls > Nmax) {
                 Xopt = X1;
                 Xopt.fit_fun(ff, ud1, ud2);
